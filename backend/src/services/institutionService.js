@@ -1,4 +1,4 @@
-﻿import { Institution } from '../models/Institution.js';
+import { Institution } from '../models/Institution.js';
 import { slugify } from '../utils/slugify.js';
 import { ApiError } from '../utils/apiError.js';
 import { ROLES } from '../constants/roles.js';
@@ -63,7 +63,7 @@ export async function updateInstitution(id, data, user) {
   const updateData = isTrustAdmin
     ? data
     : Object.fromEntries(
-        Object.entries(data).filter(([key]) => allowedFields.includes(key))
+        Object.entries(data).filter(([key]) => allowedFields.includes(key) && (['gallery', 'coverImageUrl'].includes(key) ? user.role === ROLES.INSTITUTION_ADMIN : true))
       );
 
   if (Object.keys(updateData).length === 0) {

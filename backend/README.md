@@ -13,3 +13,6 @@ API: `http://localhost:5000`
 Health: `GET /api/health`
 
 Seed admin: `admin@alhudatrust.local` / `ChangeMe123!` (change it immediately in a real deployment).
+
+## Homepage and institution slideshows
+Homepage slide data is stored in the `homepageSlides` site setting and can only be changed through the Trust Admin-protected settings endpoint. The setting validates slide count, HTTPS image URLs, text lengths, and internal button destinations. Institution slideshow images are stored in each institution's `gallery` array; institution-scoped permissions are enforced by the update service.

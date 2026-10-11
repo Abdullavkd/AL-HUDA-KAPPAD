@@ -32,8 +32,8 @@ if (!(await User.exists({ email: adminEmail }))) {
   });
 }
 const settings = {
-  site: { name: 'Al Huda Trust', publicName: 'Ainul Huda', tagline: 'Education, care and service', description: 'Al Huda Trust is the parent organization supporting its institutions and community initiatives.' },
-  hero: { title: 'Building a better future through education and care', subtitle: 'Discover Al Huda Trust and the institutions working together for the community.', slides: [] },
+  site: { name: 'Al Huda Trust', publicName: 'Ainul Huda', tagline: 'Education, care and service', description: 'Al Huda Islamic Cultural Establishment and Ainul Huda Orphanage.' },
+  hero: { title: 'Building a better future through education and care', subtitle: 'Discover Institutions Under Al Huda Islamic Cultural Establishment and Ainul Huda Orphanage are working together for the community.', slides: [] },
   contact: { address: '', phone: '', email: '', mapUrl: '' },
   social: { facebook: '', instagram: '', youtube: '' }
 };

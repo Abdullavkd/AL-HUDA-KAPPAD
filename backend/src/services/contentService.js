@@ -1,4 +1,4 @@
-import { News } from '../models/News.js';
+﻿import { News } from '../models/News.js';
 import { Event } from '../models/Event.js';
 import { Gallery } from '../models/Gallery.js';
 import { SiteSetting } from '../models/SiteSetting.js';
@@ -103,6 +103,19 @@ export async function upsertSetting(key, value) {
   if (!/^[a-zA-Z][a-zA-Z0-9_-]{0,79}$/.test(key)) {
     throw new ApiError(400, 'Invalid setting key');
   }
+  if (key === 'homepageSlides') {
+    if (!Array.isArray(value) || value.length > 20) {
+      throw new ApiError(400, 'Homepage slideshow must contain no more than 20 slides');
+    }
+    for (const slide of value) {
+      if (!slide || typeof slide !== 'object' || typeof slide.imageUrl !== 'string' || !/^https:\/\//i.test(slide.imageUrl)) {
+        throw new ApiError(400, 'Each homepage slide must have a valid HTTPS image URL');
+      }
+      if (['title', 'description', 'buttonLabel'].some(field => slide[field] != null && (typeof slide[field] !== 'string' || slide[field].length > (field === 'description' ? 500 : 160)))) {
+        throw new ApiError(400, 'Homepage slide text is too long or invalid');
+      }
+    }
+  }
   return SiteSetting.findOneAndUpdate(
     { key },
     { key, value },
@@ -126,3 +139,4 @@ export async function deleteById(Model, id, user) {
 
   return result;
 }
+
